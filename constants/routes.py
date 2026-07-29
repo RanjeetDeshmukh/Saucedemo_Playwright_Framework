@@ -1,0 +1,1 @@
+INVENTORY_PAGE = "/inventory.html"
