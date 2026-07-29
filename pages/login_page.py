@@ -3,8 +3,8 @@ import config
 class LoginPage:
     def __init__(self,page:Page):
         self.page = page
-        self.username_field = page.get_by_role("textbox",name="user-name")
-        self.password_field = page.get_by_role("textbox",name="password")
+        self.username_field = page.get_by_placeholder("Username")
+        self.password_field = page.get_by_placeholder("Password")
         self.login_button = page.locator("#login-button")
 
     def open(self):
