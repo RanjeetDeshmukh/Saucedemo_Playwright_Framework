@@ -6,6 +6,7 @@ class LoginPage:
         self.username_field = page.get_by_placeholder("Username")
         self.password_field = page.get_by_placeholder("Password")
         self.login_button = page.locator("#login-button")
+        self.error_msg_container = page.locator(".error-message-container.error h3")
 
     def open(self):
         self.page.goto(config.BASE_URL)
