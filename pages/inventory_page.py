@@ -9,6 +9,7 @@ class InventoryPage:
         self.logout_button = page.get_by_role("link",name="Logout")
         self.header = page.locator(".header_secondary_container>.title")
         self.inventory_list = page.locator(".inventory_list")
+        self.shopping_cart_badge = page.locator(".shopping_cart_badge")
 
     def open(self):
         self.page.goto(config.BASE_URL+routes.INVENTORY_PAGE)
@@ -25,3 +26,6 @@ class InventoryPage:
     def products_count(self):
         num_of_products = self.page.locator(".inventory_item").count()
         return num_of_products
+
+    def add_fleece_jacket_to_cart(self):
+        self.page.locator("#add-to-cart-sauce-labs-fleece-jacket").click()

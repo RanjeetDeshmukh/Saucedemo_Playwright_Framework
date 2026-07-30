@@ -26,3 +26,13 @@ def test_inventory_has_products(login_page,inventory_page):
     num_of_products = inventory_page.products_count()
     assert num_of_products != 0
 
+def test_can_add_product_to_cart(login_page,inventory_page):
+    login_page.open()
+    login_page.login(VALID_USER["username"], VALID_USER["password"])
+    inventory_page.add_fleece_jacket_to_cart()
+
+    #assert the cart shows badge as 1
+
+    expect(inventory_page.shopping_cart_badge).to_have_text("1")
+    expect(inventory_page.shopping_cart_link).to_be_visible()
+
