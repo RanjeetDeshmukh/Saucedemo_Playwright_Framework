@@ -8,6 +8,7 @@ class InventoryPage:
         self.burger_menu = page.get_by_role("button",name="Open Menu")
         self.logout_button = page.get_by_role("link",name="Logout")
         self.header = page.locator(".header_secondary_container>.title")
+        self.inventory_list = page.locator(".inventory_list")
 
     def open(self):
         self.page.goto(config.BASE_URL+routes.INVENTORY_PAGE)
@@ -20,3 +21,7 @@ class InventoryPage:
 
     def logout(self):
         self.logout_button.click()
+
+    def products_count(self):
+        num_of_products = self.page.locator(".inventory_item").count()
+        return num_of_products
