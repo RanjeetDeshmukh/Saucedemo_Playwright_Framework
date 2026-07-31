@@ -1,3 +1,5 @@
+from platform import ios_ver
+
 import config
 import re
 from test_data.users import VALID_USER
@@ -35,4 +37,23 @@ def test_can_add_product_to_cart(login_page,inventory_page):
 
     expect(inventory_page.shopping_cart_badge).to_have_text("1")
     expect(inventory_page.shopping_cart_link).to_be_visible()
+
+def test_remove_added_product(login_page,inventory_page):
+    login_page.open()
+    login_page.login(VALID_USER["username"], VALID_USER["password"])
+    inventory_page.add_fleece_jacket_to_cart()
+    product_added_to_cart = inventory_page.get_name_of_product_added_to_cart()
+
+
+    # assert the cart shows badge as 1
+    expect(inventory_page.shopping_cart_badge).to_have_text("1")
+
+    inventory_page.remove_added_product()
+
+    #assert shopping cart badge is no longer displayed
+    expect(inventory_page.shopping_cart_badge).not_to_be_attached()
+
+    #assert the item has Add to cart button
+    expect(inventory_page.item_description_container.filter(has_text=product_added_to_cart)).to_contain_text("Add to cart")
+
 
