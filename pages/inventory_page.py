@@ -29,3 +29,13 @@ class InventoryPage:
 
     def add_fleece_jacket_to_cart(self):
         self.page.locator("#add-to-cart-sauce-labs-fleece-jacket").click()
+
+    def get_name_of_product_added_to_cart(self):
+        description = self.page.locator(".inventory_item_description").filter(has=self.page.get_by_role("button",name="Remove"))
+        name_of_produce_added = description.locator(".inventory_item_name ").text_content()
+        return name_of_produce_added
+
+    def get_price_of_product_added_to_cart(self):
+        description = self.page.locator(".inventory_item_description").filter(has=self.page.get_by_role("button",name="Remove"))
+        price_of_product = description.locator(".inventory_item_price").text_content()
+        return price_of_product
