@@ -10,6 +10,7 @@ class InventoryPage:
         self.header = page.locator(".header_secondary_container>.title")
         self.inventory_list = page.locator(".inventory_list")
         self.shopping_cart_badge = page.locator(".shopping_cart_badge")
+        self.item_description_container = page.locator(".inventory_item_description")
 
     def open(self):
         self.page.goto(config.BASE_URL+routes.INVENTORY_PAGE)
@@ -31,11 +32,15 @@ class InventoryPage:
         self.page.locator("#add-to-cart-sauce-labs-fleece-jacket").click()
 
     def get_name_of_product_added_to_cart(self):
-        description = self.page.locator(".inventory_item_description").filter(has=self.page.get_by_role("button",name="Remove"))
+        description = self.item_description_container.filter(has=self.page.get_by_role("button",name="Remove"))
         name_of_produce_added = description.locator(".inventory_item_name ").text_content()
         return name_of_produce_added
 
     def get_price_of_product_added_to_cart(self):
-        description = self.page.locator(".inventory_item_description").filter(has=self.page.get_by_role("button",name="Remove"))
+        description = self.item_description_container.filter(has=self.page.get_by_role("button",name="Remove"))
         price_of_product = description.locator(".inventory_item_price").text_content()
         return price_of_product
+
+    def remove_added_product(self):
+        description = self.item_description_container.filter(has=self.page.get_by_role("button",name="Remove"))
+        description.get_by_role("button",name="Remove").click()
