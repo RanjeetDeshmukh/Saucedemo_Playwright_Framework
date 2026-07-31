@@ -2,6 +2,7 @@ import re
 from playwright.sync_api import expect
 from test_data.users import VALID_USER
 from constants import routes
+
 def test_product_in_cart(login_page,inventory_page,cart_page):
     login_page.open()
     login_page.login(VALID_USER["username"],VALID_USER["password"])
@@ -24,4 +25,17 @@ def test_product_in_cart(login_page,inventory_page,cart_page):
 
     #assert quantity of product is 1
     assert cart_page.quantity_of_item_in_cart() == "1"
+
+def test_removing_prod_from_cart(login_page,inventory_page,cart_page):
+    login_page.open()
+    login_page.login(VALID_USER["username"],VALID_USER["password"])
+    inventory_page.add_fleece_jacket_to_cart()
+    inventory_page.open_shopping_cart()
+    name_of_item_in_cart = cart_page.get_name_of_item_in_cart()
+    cart_page.remove_item_from_cart()
+
+    #assert removed item is not present in cart
+    expect(cart_page.cart_item_container.filter(has_text=name_of_item_in_cart)).to_be_hidden()
+
+
 
