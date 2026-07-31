@@ -38,4 +38,18 @@ def test_removing_prod_from_cart(login_page,inventory_page,cart_page):
     expect(cart_page.cart_item_container.filter(has_text=name_of_item_in_cart)).to_be_hidden()
 
 
+def test_can_navigate_back_to_inventory(login_page,inventory_page,cart_page):
+    login_page.open()
+    login_page.login(VALID_USER["username"], VALID_USER["password"])
+    inventory_page.add_fleece_jacket_to_cart()
+    inventory_page.open_shopping_cart()
 
+    cart_page.go_back_to_inventory()
+
+    #assert we are back on inventory page
+    expect(inventory_page.page).to_have_url(re.compile(fr"{routes.INVENTORY_PAGE}"))
+
+    #assert inventory page header is displayed
+    expect(inventory_page.header).to_have_text("Products")
+    #assert the cart badge still shows 1
+    expect(inventory_page.shopping_cart_badge).to_have_text("1")
