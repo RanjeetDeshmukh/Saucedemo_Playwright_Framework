@@ -14,3 +14,6 @@ class CheckoutTwoPage:
     def get_name_of_in_final_cart(self):
         name_of_prod = self.page.locator(".inventory_item_name").text_content()
         return name_of_prod
+
+    def click_finish_button(self):
+        self.finish_button.click()
