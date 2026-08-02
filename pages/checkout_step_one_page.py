@@ -13,4 +13,17 @@ class CheckoutOnePage:
     def open(self):
         self.page.goto(config.BASE_URL+routes.CHECKOUT_STEP_ONE_PAGE)
 
+    def enter_firstname(self,firstname):
+        self.first_name_field.fill(firstname)
 
+    def enter_lastname(self,lastname):
+        self.last_name_field.fill(lastname)
+
+    def enter_postalcode(self,postalcode):
+        self.postal_code_field.fill(postalcode)
+
+    def save_checkout_user_info(self,firstname,lastname,postalcode):
+        self.enter_firstname(firstname)
+        self.enter_lastname(lastname)
+        self.enter_postalcode(postalcode)
+        self.continue_button.click()

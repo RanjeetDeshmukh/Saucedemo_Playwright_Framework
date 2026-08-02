@@ -1,0 +1,1 @@
+VALID_CHECKOUT_USER = {"firstname":"Christopher", "lastname":"Nolan", "postalcode":"123456"}
