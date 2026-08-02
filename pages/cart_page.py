@@ -32,3 +32,7 @@ class CartPage:
 
     def go_back_to_inventory(self):
         self.page.get_by_role("button",name="Continue Shopping").click()
+
+    def proceed_to_checkout(self):
+        self.page.get_by_role("button",name="Checkout").click()
+
