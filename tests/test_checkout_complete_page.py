@@ -19,5 +19,3 @@ def test_user_can_purchase_successfully(login_page,inventory_page,cart_page,chec
 
     #assert user is on checkout complete page
     expect(checkout_complete_page.page).to_have_url(re.compile(fr"{CHECKOUT_COMPLETE_PAGE}"))
-
-    checkout_complete_page.page.pause()
